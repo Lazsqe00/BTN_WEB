@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="container">
+                <div class="top-header display-flex">
+                    <a href="#">
+                        <img src="images/logo1.png" alt="Logo" />
+                    </a>
+            
+                   <!--login-->
+                    <ul class="header-right display-flex">
+                        <li v-if="loginUsername">Xin chào, {{ loginUsername }}</li>
+                        <template v-else>
+                            <li><a href="./login.html" >Đăng Nhập</a></li>
+                            <li>/</li>
+                            <li><a href="./login.html">Đăng Ký</a></li>
+                        </template>
+                    </ul>
+
+                         
+                        <div class="cart">
+                            <a href="#"><i class="fas fa-shopping-cart"></i> </a>
+                            <span class="cart-count" v-if="cartCount > 0">{{ cartCount }}</span>
+                    </div>
+                
+                </div>
+
+                <!-- Slider -->
+                <div class="slider">
+                    <img
+                        v-for="(slide, index) in slides"
+                        :key="index"
+                        class="slide"
+                        :class="{ active: currentSlide === index }"
+                        :src="slide"
+                        alt="Slide"
+                    />
+                    <button class="prev" @click="prevSlide">❮</button>
+                    <button class="next" @click="nextSlide">❯</button>
+                </div>
+
+                <!-- Menu -->
+                <div class="display-flex">
+                    <ul class="menu">
+                        <li><a href="#" class="nav_active">Trang Chủ</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                         <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Tin Tức</a></li>
+                    </ul>
+                    <form action="" class="search" @submit.prevent>
+                        <input type="text" placeholder="Search"  v-model="searchKeyword" />
+                        <button type="submit" class="btn-search">Tìm Kiếm</button>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <h1 class="title">
+                    <span>Danh mục</span> <span class="highlight">Sản phẩm</span>
+                </h1>
+                <div class="product-grid">
+                    <div
+                        v-for="(product, index) in filteredProducts"  :key="index" class="product  product2"  @click="handleOverlay(index)" >
+                        <img :src="product.image">
+                        <div class="info">
+                            <p class="name">{{ product.name }}</p>
+                            <p class="price">{{ product.price }}</p>
+                        </div>
+                        <div class="overlay" :style="{ display: product.showOverlay ? 'flex' : 'none' }">
+                            <button class="btn red"  @click.stop="addToCart(index)" >Thêm vào giỏ</button>
+                            <button class="btn white">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>
+                        SHARED DEAL <span>thời trang cao cấp</span>
+                    </h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Add: 5/12A Quang Trung, P.14, Quận Gò Vấp, Tp. Hồ Chí Minh</p>
+                    <p><i class="fas fa-phone-alt"></i> Phone: (08) 66 85 85 38</p>
+                    <p><i class="fas fa-envelope"></i> info@gmail.com</p>
+                </div>
+                <div class="footer-right">
+                    <h3>Giới thiệu</h3>
+                    <p>
+                        Công ty thời trang SHARED DEAL được <br /> thành lập 2020, chuyên cung cấp những <br />
+                        dòng sản phẩm thời trang cao cấp.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="footer-bottom">
+                <p>© 2022 By Students NTU <br />Facebook: @@@</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

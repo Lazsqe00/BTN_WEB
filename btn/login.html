@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tài khoản</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="login.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="container1" :class="{ active: isRegistering }">
+      <div class="form-box login">
+        <form @submit.prevent="handleLogin">
+          <h1>Đăng nhập</h1>
+          <div class="input-box">
+            <input v-model="loginUsername" type="text" placeholder="Tên đăng nhập" required autocomplete="username" />
+            <i class='bx bx-user'></i>
+          </div>
+          <div class="input-box">
+            <input v-model="loginPassword" type="password" placeholder="Mật khẩu" required autocomplete="current-password" />
+            <i class='bx bx-lock-alt'></i>
+          </div>
+          <div class="forgot-pass">
+            <div v-if="loginError" class="alert alert-danger" role="alert" style="color: brown; font-size: 15px; margin-bottom: 5px;">
+            Tên đăng nhập hoặc mật khẩu không đúng.
+          </div>
+            <a href="#">Quên mật khẩu?</a>
+          </div>
+          <button type="submit" class="btn1">Đăng nhập</button>
+        </form>
+      </div>
+      <div class="form-box register">
+        <form @submit.prevent="handleRegister">
+          <h1>Đăng ký</h1>
+          <div class="input-box">
+            <input v-model="registerUsername" type="text" placeholder="Tên đăng nhập" required />
+            <i class='bx bx-user'></i>
+          </div>
+          <div class="input-box">
+            <input v-model="registerEmail" type="text" placeholder="Email" required autocomplete="username" />
+            <i class='bx bx-envelope'></i>
+          </div>
+          <div v-if="emailError" style="color: brown; font-size: 15px; margin-top: -20px; margin-bottom: -10px;">{{ emailError }}</div>
+          <div class="input-box">
+            <input v-model="registerPassword" type="password" placeholder="Mật khẩu" required autocomplete="new-password" />
+            <i class='bx bx-lock-alt'></i>
+          </div>
+          <button type="submit" class="btn1">Đăng ký</button>
+        </form>
+      </div>
+      <div class="toggle-box">
+        <div class="toggle-panel toggle-left">
+          <h1>Hello, Welcome!</h1>
+          <p>Bạn chưa có tài khoản?</p>
+          <button @click="isRegistering = true" class="btn1">Đăng ký</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Welcome Back!</h1>
+          <p>Bạn đã có tài khoản</p>
+          <button @click="isRegistering = false" class="btn1">Đăng nhập</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>
